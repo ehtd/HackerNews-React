@@ -40,7 +40,7 @@ class Cell extends Component {
             <Text style={[styles.cellLabelTitle, styles.normal]}>{this.props.name}</Text>
             <Text style={[styles.cellLabelDescription, styles.small]}>{this.props.name}</Text>
           </View>
-          <CircledLabel name='10'/>
+          <CircledLabel name='999'/>
         </View>
       </View>
     );
@@ -51,7 +51,7 @@ class CircledLabel extends Component {
   render() {
     return (
       <View style={[styles.circledLabel, styles.centered]}>
-        <Text style={[styles.centered, styles.red]} numberOfLines={1}>
+        <Text style={[styles.centered, styles.red, styles.normal]} numberOfLines={1}>
           {this.props.name}
         </Text>
       </View>
@@ -71,6 +71,8 @@ class NumberLabel extends Component {
   }
 }
 
+let circleSize = 50;
+let paddingSize = 10;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 4,
@@ -82,13 +84,13 @@ const styles = StyleSheet.create({
   },
   cell: {
     backgroundColor: '#FFF',
-    padding: 10,
+    padding: paddingSize,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 10,
   },
   cellLabelTitle: {
-    paddingHorizontal: 10,
+    paddingHorizontal: paddingSize,
     flex: 1,
     backgroundColor: '#FFF',
   },
@@ -99,9 +101,9 @@ const styles = StyleSheet.create({
   },
   circledLabel: {
     backgroundColor: '#F00',
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: circleSize,
+    width: circleSize,
+    borderRadius: circleSize / 2,
   },
   largeView: {
     height: 40,
