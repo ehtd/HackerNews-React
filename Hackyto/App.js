@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 export default class App extends Component {
   render() {
     return (
-      <View>
+      <View style={{backgroundColor:'#333'}}>
         <FlatList 
           data={[
             {key: "Test1"}, 
@@ -35,8 +35,11 @@ class Cell extends Component {
     return(
       <View style={styles.container}>
         <View style={styles.cell}>
-          <NumberLabel name='10'/>
-          <Text style={styles.cellLabel}>{this.props.name}</Text>
+          <NumberLabel name='200'/>
+          <View style={{flex:1, flexDirection: 'column'}}>
+            <Text style={styles.cellLabelTitle}>{this.props.name}</Text>
+            <Text style={styles.cellLabelDescription}>{this.props.name}</Text>
+          </View>
           <CircledLabel name='10'/>
         </View>
       </View>
@@ -48,7 +51,7 @@ class CircledLabel extends Component {
   render() {
     return (
       <View style={styles.circledLabel}>
-        <Text style={styles.circledText} numberOfLines={1}>
+        <Text style={[styles.centeredText, styles.red]} numberOfLines={1}>
           {this.props.name}
         </Text>
       </View>
@@ -59,8 +62,8 @@ class CircledLabel extends Component {
 class NumberLabel extends Component {
   render() {
     return (
-      <View style={styles.centeredView}>
-        <Text style={styles.circledText} numberOfLines={1}>
+      <View style={styles.largeCenteredView}>
+        <Text style={[styles.centeredText, styles.large]} numberOfLines={1}>
           {this.props.name}
         </Text>
       </View>
@@ -81,22 +84,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     paddingVertical: 1
   },
-  circledText: {
+  centeredText: {
     alignItems: 'center',
-    color: '#FFF',
-    // backgroundColor: '#0F0',
     justifyContent: 'center'
   },
   cell: {
-    backgroundColor: '#000',
+    backgroundColor: '#FFF',
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 10,
   },
-  cellLabel: {
-    padding: 10,
+  cellLabelTitle: {
+    paddingHorizontal: 10,
     flex: 1,
+    fontSize: 20,
+    backgroundColor: '#FFF',
+  },
+  cellLabelDescription: {
+    paddingHorizontal: 10,
+    flex: 1,
+    fontSize: 10,
     backgroundColor: '#FFF',
   },
   cellNumberLabel: {
@@ -116,10 +124,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   centeredView: {
-    backgroundColor: '#F00',
     height: 40,
     width: 40,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  largeCenteredView: {
+    height: 40,
+    width: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  red: {
+    backgroundColor: '#F00',
+    color: '#FFF',
+  },
+  large: {
+    fontSize: 26
   }
 });
