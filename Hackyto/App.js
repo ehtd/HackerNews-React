@@ -37,8 +37,8 @@ class Cell extends Component {
         <View style={styles.cell}>
           <NumberLabel name='200'/>
           <View style={{flex:1, flexDirection: 'column'}}>
-            <Text style={styles.cellLabelTitle}>{this.props.name}</Text>
-            <Text style={styles.cellLabelDescription}>{this.props.name}</Text>
+            <Text style={[styles.cellLabelTitle, styles.normal]}>{this.props.name}</Text>
+            <Text style={[styles.cellLabelDescription, styles.small]}>{this.props.name}</Text>
           </View>
           <CircledLabel name='10'/>
         </View>
@@ -50,8 +50,8 @@ class Cell extends Component {
 class CircledLabel extends Component {
   render() {
     return (
-      <View style={styles.circledLabel}>
-        <Text style={[styles.centeredText, styles.red]} numberOfLines={1}>
+      <View style={[styles.circledLabel, styles.centered]}>
+        <Text style={[styles.centered, styles.red]} numberOfLines={1}>
           {this.props.name}
         </Text>
       </View>
@@ -62,19 +62,11 @@ class CircledLabel extends Component {
 class NumberLabel extends Component {
   render() {
     return (
-      <View style={styles.largeCenteredView}>
-        <Text style={[styles.centeredText, styles.large]} numberOfLines={1}>
+      <View style={[styles.largeView, styles.centered]}>
+        <Text style={[styles.centered, styles.large]} numberOfLines={1}>
           {this.props.name}
         </Text>
       </View>
-    );
-  }
-}
-
-class Greeting extends Component {
-  render() {
-    return (
-      <Text>Hello {this.props.name}!</Text>
     );
   }
 }
@@ -84,7 +76,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     paddingVertical: 1
   },
-  centeredText: {
+  centered: {
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -98,42 +90,22 @@ const styles = StyleSheet.create({
   cellLabelTitle: {
     paddingHorizontal: 10,
     flex: 1,
-    fontSize: 20,
     backgroundColor: '#FFF',
   },
   cellLabelDescription: {
     paddingHorizontal: 10,
     flex: 1,
-    fontSize: 10,
     backgroundColor: '#FFF',
-  },
-  cellNumberLabel: {
-    backgroundColor: '#F00',
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   circledLabel: {
     backgroundColor: '#F00',
     height: 40,
     width: 40,
     borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  centeredView: {
-    height: 40,
-    width: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  largeCenteredView: {
+  largeView: {
     height: 40,
     width: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   red: {
     backgroundColor: '#F00',
@@ -141,5 +113,11 @@ const styles = StyleSheet.create({
   },
   large: {
     fontSize: 26
+  },
+  normal: {
+    fontSize: 20
+  },
+  small: {
+    fontSize: 10
   }
 });
