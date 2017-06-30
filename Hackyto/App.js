@@ -1,29 +1,50 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator } from 'react-native';
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true
+    }
+  }
+
+  async getTopStories() {
+    try {
+      let response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+      let jsonResponse = await response.json();
+      this.setState({
+        isLoading: false,
+        data: jsonResponse
+      });
+    } catch (error) {
+      console.error(error)
+      this.setState({
+        isLoading: false
+      });
+    }
+  }
+
+  componentDidMount() {
+    return(
+      this.getTopStories()
+    );
+  }
+
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     return (
       <View style={{backgroundColor:'#333'}}>
         <FlatList 
-          data={[
-            {key: "Test1"}, 
-            {key: "Test2"},
-            {key: "Test3"}, 
-            {key: "Test4"},
-            {key: "Test5"}, 
-            {key: "Test6"},
-            {key: "Test7"}, 
-            {key: "Test8"},
-            {key: "Test9"}, 
-            {key: "Test10"},
-            {key: "Test11"},
-            {key: "Test12"},
-            {key: "Test13"},
-            {key: "Test14"},
-            {key: "Test15"},
-            ]}
-            renderItem={({item}) => <Cell name={item.key}/>}
+          data={this.state.data}
+            renderItem={({item}) => <Cell name={item}/>}
           />
       </View>
     );
