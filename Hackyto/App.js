@@ -3,22 +3,40 @@ import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 
 export default class App extends Component {
   render() {
-    let pic = {
-      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
-    }
-
     return (
       <View>
-        <Image source={pic} style={{width: 193, height: 110}}/>
-        <Greeting name='Test'/>
+        <FlatList 
+          data={[
+            {key: "Test1"}, 
+            {key: "Test2"},
+            {key: "Test3"}, 
+            {key: "Test4"},
+            {key: "Test5"}, 
+            {key: "Test6"},
+            {key: "Test7"}, 
+            {key: "Test8"},
+            {key: "Test9"}, 
+            {key: "Test10"},
+            {key: "Test11"},
+            {key: "Test12"},
+            {key: "Test13"},
+            {key: "Test14"},
+            {key: "Test15"},
+            ]}
+            renderItem={({item}) => <Cell name={item.key}/>}
+          />
+      </View>
+    );
+  }
+}
+
+class Cell extends Component {
+  render() {
+    return(
+      <View style={styles.container}>
         <View style={styles.cell}>
-          <CircledLabel name='1'/>
-          <Text style={styles.cellLabel}>Description Description Description Description Description Description Description Description Description Description Description </Text>
-          <CircledLabel name='999'/>
-        </View>
-        <View style={styles.cell}>
-          <CircledLabel name='2'/>
-          <Text style={styles.cellLabel}>Description Description Description</Text>
+          <NumberLabel name='10'/>
+          <Text style={styles.cellLabel}>{this.props.name}</Text>
           <CircledLabel name='10'/>
         </View>
       </View>
@@ -38,6 +56,18 @@ class CircledLabel extends Component {
   }
 }
 
+class NumberLabel extends Component {
+  render() {
+    return (
+      <View style={styles.centeredView}>
+        <Text style={styles.circledText} numberOfLines={1}>
+          {this.props.name}
+        </Text>
+      </View>
+    );
+  }
+}
+
 class Greeting extends Component {
   render() {
     return (
@@ -48,15 +78,13 @@ class Greeting extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 4,
+    paddingVertical: 1
   },
   circledText: {
     alignItems: 'center',
     color: '#FFF',
-    backgroundColor: '#0F0',
+    // backgroundColor: '#0F0',
     justifyContent: 'center'
   },
   cell: {
@@ -71,11 +99,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
+  cellNumberLabel: {
+    backgroundColor: '#F00',
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   circledLabel: {
     backgroundColor: '#F00',
     height: 40,
     width: 40,
     borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centeredView: {
+    backgroundColor: '#F00',
+    height: 40,
+    width: 40,
     justifyContent: 'center',
     alignItems: 'center',
   }
